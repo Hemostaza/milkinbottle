@@ -10,6 +10,9 @@ public final class MilkInBottle extends JavaPlugin {
 
     @Override
     public void onEnable() {
+
+        new UpdateChecker(this,122232);
+
         // Plugin startup logic
         new Items();
         AddRecipes();
