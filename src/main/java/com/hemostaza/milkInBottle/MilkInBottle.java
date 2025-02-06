@@ -1,5 +1,6 @@
 package com.hemostaza.milkInBottle;
 
+import com.hemostaza.updateChecker.UpdateChecker;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -7,6 +8,8 @@ import org.bukkit.inventory.ShapelessRecipe;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class MilkInBottle extends JavaPlugin {
+
+    private NamespacedKey bottledMilk;
 
     @Override
     public void onEnable() {
@@ -16,7 +19,7 @@ public final class MilkInBottle extends JavaPlugin {
         // Plugin startup logic
         new Items();
         AddRecipes();
-        getServer().getPluginManager().registerEvents(new OnDrinkEvent(), this);
+        getServer().getPluginManager().registerEvents(new EventListeners(bottledMilk), this);
 
     }
 
@@ -27,7 +30,7 @@ public final class MilkInBottle extends JavaPlugin {
 
     public void AddRecipes(){
 
-        NamespacedKey bottledMilk = new NamespacedKey(this,"bottledmilk");
+        bottledMilk = new NamespacedKey(this,"bottledmilk");
         ShapelessRecipe bottledMilkRecipe = new ShapelessRecipe(bottledMilk,Items.milkInBottle);
         bottledMilkRecipe.addIngredient(Material.GLASS_BOTTLE);
         bottledMilkRecipe.addIngredient(Material.GLASS_BOTTLE);
